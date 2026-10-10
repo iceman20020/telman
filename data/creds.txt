@@ -1,0 +1,8 @@
+root:root
+root:12345
+root:admin
+root:password
+admin:admin
+admin:password
+pi:raspberry
+ubnt:ubnt
